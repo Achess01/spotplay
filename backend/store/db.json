@@ -1,0 +1,78 @@
+{
+  "user": [
+    {
+      "_id": 0,
+      "_username": "Achess",
+      "_email": "achess@gmail.com",
+      "_password": "$2b$10$IFrmGwFDbACTO01hWRQXG.rGVOLLt1WMq2uJ.2zwMpCYMnl8zEl1.",
+      "_playlists": []
+    },
+    {
+      "_id": 1,
+      "_username": "user1",
+      "_email": "user1@gmail.com",
+      "_password": "$2b$10$EW18otgSW.u.Dj3VflgHGu1muns10c8zbOK8DzuS4lQ7IZShHvL0a",
+      "_playlists": []
+    },
+    {
+      "_id": 2,
+      "_username": "user2",
+      "_email": "user2@gmail.com",
+      "_password": "$2b$10$eTeJO2lVn.Ipb2Dg9Njo2eHMwGoAaQf6anoYOhOVlwzRlmnOPhIBW",
+      "_playlists": []
+    },
+    {
+      "_id": 3,
+      "_username": "user2",
+      "_email": "hola@gmail.com",
+      "_password": "$2b$10$hyrYjz8L9zUBaNFo4L8m8e2q42zr7r.IS.i1cfRFsbhnyzuFzzska",
+      "_playlists": []
+    },
+    {
+      "_id": 4,
+      "_username": "user2",
+      "_email": "hola@gmail.com",
+      "_password": "$2b$10$zKjby9stjYrXmdH2DIn3Mu7gh6xMv6dZs1AXehArJq0MX.cKeDdRG",
+      "_playlists": []
+    }
+  ],
+  "song": [
+    {
+      "_id": 0,
+      "_title": "song1",
+      "_uri": "uri.com",
+      "_duration": "3.5",
+      "_image": "song.image",
+      "_idArtist": 1,
+      "_idGenre": 1
+    },
+    {
+      "_id": 1,
+      "_title": "song1",
+      "_uri": "uri.com",
+      "_duration": "3.5",
+      "_image": "song.image",
+      "_idArtist": 1,
+      "_idGenre": 1
+    },
+    {
+      "_id": 2,
+      "_title": "song1",
+      "_uri": "uri.com",
+      "_duration": "3.5",
+      "_image": "song.image",
+      "_idArtist": 1,
+      "_idGenre": 1
+    },
+    {
+      "_id": 3,
+      "_title": "song1",
+      "_uri": "uri.com",
+      "_duration": "3.5",
+      "_image": "song.image",
+      "_idArtist": 1,
+      "_idGenre": 1
+    }
+  ],
+  "playlist": []
+}
