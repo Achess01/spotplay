@@ -14,7 +14,8 @@ class SongController {
   }
 
   getAllSongs() {
-    return 'all songs'
+    const songs = this.service.getDataFromTable('song')
+    return songs
   }
 
   createNewSong(song) {
@@ -23,14 +24,14 @@ class SongController {
     return response
   }
 
-  updateSong(song) {
-    console.log(song)
-    return 'song updated'
+  updateSong(id, content) {
+    const updated = this._service.update('song', id, content)
+    return updated
   }
 
   deleteSong(id) {
-    console.log(id)
-    return 'song deleted'
+    const deleted = this._service.delete('song', id)
+    return deleted
   }
 }
 

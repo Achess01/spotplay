@@ -10,8 +10,11 @@ class DataJson {
     const items = this.readJsonFile()
     const tables = {
       user: [],
+      role: [],
       song: [],
-      playlist: []
+      artist: [],
+      playlist: [],
+      genre: []
     }
     if (items.length === 0) {
       this.writeJsonFile(tables)
@@ -48,18 +51,38 @@ class DataJson {
     if (data) {
       return data
     }
-    return []
+    return null
   }
 
   getEntity(tableName, id) {
+    const idN = parseInt(id)
     const table = this.getDataFromTable(tableName)
     if (table) {
-      const entity = table.find((e) => (e._id === id))
+      const entity = table.find((e) => e._id === idN)
       if (entity) {
         return entity
       }
     }
-    return {}
+    return null
+  }
+
+  update(table, id, content) {
+    const idN = parseInt(id)
+    const items = this.readJsonFile()
+    const data = items[table]
+    if (items[table]) {
+      const index = data.findIndex((o) => o._id === idN)
+      if (index !== -1) {
+        const obj = data[index]
+        data[index] = {
+          ...obj,
+          ...content
+        }
+        this.writeJsonFile(items)
+        return data[index]
+      }
+    }
+    return null
   }
 
   save(table, data) {
@@ -68,7 +91,22 @@ class DataJson {
     data._id = id
     items[table].push(data)
     this.writeJsonFile(items)
-    return 'ok'
+    return data
+  }
+
+  delete(table, id) {
+    const idN = parseInt(id)
+    const items = this.readJsonFile()
+    const data = items[table]
+    if (items[table]) {
+      const index = data.findIndex((o) => o._id === idN)
+      if (index !== -1) {
+        data.splice(index, 1)
+        this.writeJsonFile(items)
+        return idN
+      }
+    }
+    return null
   }
 }
 

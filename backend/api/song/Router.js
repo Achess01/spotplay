@@ -8,17 +8,17 @@ class SongRouter {
   }
 
   registerRoutes() {
-    this._router.get('/:idSong', this.handleGetOneSong.bind(this))
     this._router.get('/', this.handleGetSong.bind(this))
     this._router.post('/', this.handlePostSong.bind(this))
-    this._router.delete('/', this.handleDeleteSong.bind(this))
-    this._router.put('/', this.handlePutSong.bind(this))
+    this._router.get('/:idSong', this.handleGetOneSong.bind(this))
+    this._router.put('/:idSong', this.handlePutOneSong.bind(this))
+    this._router.delete('/:idSong', this.handleDeleteOneSong.bind(this))
   }
 
   handleGetSong(req, res) {
     try {
       const result = this._controller.getAllSongs()
-      if (result.length === 0) {
+      if (!result) {
         this._response.success(
           req,
           res,
@@ -38,37 +38,53 @@ class SongRouter {
     }
   }
 
-  handleGetOneSong(req, res) {
-    try {
-      const { idSong } = req.params
-      const idNumber = parseInt(idSong)
-      const song = this._controller.getOneSong(idNumber)
-      if (Object.keys(song).length > 0) {
-        this._response.success(req, res, song, this._httpCode.OK)
-      } else {
-        this._response.error(req, res, 'Not found', this._httpCode.NOT_FOUND)
-      }
-    } catch (error) {
-      this._response.error(req, res, 'Not found', this._httpCode.INTERNAL_SERVER_ERROR)
-    }
-  }
-
   handlePostSong(req, res) {
     const song = req.body
     const result = this._controller.createNewSong(song)
     console.log(result)
     console.log(req.method)
-    this._response.success(req, res, 'Canción creada', this._httpCode.OK)
+    this._response.success(req, res, 'Canción creada', this._httpCode.CREATED)
   }
 
-  handleDeleteSong(req, res) {
-    console.log(req.method)
-    res.send('Soy la ruta delete /song')
+  handleGetOneSong(req, res) {
+    try {
+      const { idSong } = req.params
+      const idNumber = parseInt(idSong)
+      const song = this._controller.getOneSong(idNumber)
+      if (song) {
+        this._response.success(req, res, song, this._httpCode.OK)
+      } else {
+        this._response.error(req, res, 'Not found', this._httpCode.NOT_FOUND)
+      }
+    } catch (error) {
+      this._response.error(
+        req,
+        res,
+        'Not found',
+        this._httpCode.INTERNAL_SERVER_ERROR
+      )
+    }
   }
 
-  handlePutSong(req, res) {
-    console.log(req.method)
-    res.send('Soy la ruta put /song')
+  handlePutOneSong(req, res) {
+    const content = req.body
+    const { id } = req.params
+    const updated = this._controller.updateSong(id, content)
+    if (updated) {
+      this._response.success(req, res, updated, this._httpCode.OK)
+    } else {
+      this._response.error(req, res, 'Not found', this._httpCode.NOT_FOUND)
+    }
+  }
+
+  handleDeleteOneSong(req, res) {
+    const { id } = req.params
+    const deleted = this._controller.deleteSong(id)
+    if (deleted) {
+      this._response.success(req, res, deleted, this._httpCode.OK)
+    } else {
+      this._response.error(req, res, 'Not found', this._httpCode.NOT_FOUND)
+    }
   }
 }
 

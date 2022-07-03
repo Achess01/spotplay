@@ -6,7 +6,8 @@ class UserController {
   }
 
   getUsers() {
-    return 'all users'
+    const users = this._service.getDataFromTable('user')
+    return users
   }
 
   createNewUser(user) {
@@ -16,14 +17,19 @@ class UserController {
     return response
   }
 
-  updateUser(user) {
-    console.log(user)
-    return 'user updated'
+  getUser(id) {
+    const user = this._service.getEntity('user', id)
+    return user
+  }
+
+  updateUser(id, content) {
+    const updated = this._service.update('user', id, content)
+    return updated
   }
 
   deleteUser(id) {
-    console.log(id)
-    return 'user deleted'
+    const deleted = this._service.delete('user', id)
+    return deleted
   }
 }
 

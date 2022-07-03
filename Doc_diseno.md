@@ -66,7 +66,8 @@ Para todos los endpoints se la dirección base es `/api/v1` ej:
 
 | **Endpoint** | **GET**                     | **POST**      | **PUT**   | **DELETE**  |
 |--------------|-----------------------------|---------------|-----------|-------------|
-| /user        | All users without playlists | Create a user | -         | -           |
+| /user/signup |                             | Create a user | -         | -           |
+| /user        | All users without playlists |               | -         | -           |
 | /user:id     | Get a user with playlists   | -             | Edit user | Delete user |
 
 - Role
