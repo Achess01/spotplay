@@ -1,10 +1,18 @@
 class UserRouter {
-  constructor(router, controller, response, httpCode, checkUser) {
+  constructor({
+    router,
+    controller,
+    response,
+    httpCode,
+    checkUser,
+    checkUpdate
+  }) {
     this._router = router()
     this._controller = controller
     this._response = response
     this._httpCode = httpCode
     this._checkUser = checkUser
+    this._checkUpdate = checkUpdate
     this.registerRoutes()
   }
 
@@ -13,7 +21,7 @@ class UserRouter {
     this._router.get('/', this.handleGetUsers.bind(this))
     this._router.get('/:id', this.handleGetUser.bind(this))
     this._router.delete('/:id', this.handleDeleteUser.bind(this))
-    this._router.put('/:id', this.handlePutUser.bind(this))
+    this._router.put('/:id', this._checkUpdate, this.handlePutUser.bind(this))
   }
 
   handleSignUp(req, res) {

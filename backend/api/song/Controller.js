@@ -14,7 +14,7 @@ class SongController {
   }
 
   getAllSongs() {
-    const songs = this.service.getDataFromTable('song')
+    const songs = this._service.getDataFromTable('song')
     return songs
   }
 

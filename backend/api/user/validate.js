@@ -1,50 +1,29 @@
-import { response } from '../../response/response.js'
-/* import expressValidator from 'express-validator'
+import { body } from 'express-validator'
+import { resultHandler } from '../middlewareHandler.js'
 
-const check = expressValidator.check
-const validationResult = expressValidator.validationResult
 export const validateCreateUser = [
-  check('username')
+  body('username')
+    .exists()
+    .withMessage('Expected: username')
+    .bail()
     .isLength({ min: 3 })
+    .withMessage('Name should be at least 3 characters'),
+  body('email')
     .exists()
-    .withMessage('Name should be alleast 3 characters'),
-  check('email')
-    .exists()
+    .withMessage('Expected: email')
+    .bail()
     .isEmail()
-    .withMessage('Password should be alleast 6 characters'),
-  check('password')
-    .isLength({ min: 6 })
+    .withMessage('Wrong email format'),
+  body('password')
     .exists()
-    .withMessage('Password should be alleast 6 characters')
-] */
+    .withMessage('Expected: password')
+    .bail()
+    .isLength({ min: 6 })
+    .withMessage('Password should be at least 6 characters'),
+  resultHandler
+]
 
-export const checkUser = (req, res, next) => {
-  try {
-    const { username, email, password } = req.body
-    if (!username || !email || !password) {
-      return response.error(req, res, 'Please enter all fields', 400)
-    }
-    if (username.length < 3) {
-      return response.error(
-        req,
-        res,
-        'username should be at least 3 characters',
-        400
-      )
-    }
-    if (password.length < 6) {
-      return response.error(
-        req,
-        res,
-        'password should be at least 6 characters',
-        400
-      )
-    }
-    if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      return response.error(req, res, 'Please enter a valid email', 400)
-    }
-    next()
-  } catch (error) {
-    return response.error(req, res, 'Something went wrong', 500)
-  }
-}
+export const validateUpdate = [
+  body(['_username', '_email', '_password']).exists(),
+  resultHandler
+]

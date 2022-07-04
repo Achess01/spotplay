@@ -6,7 +6,7 @@ import { response } from '../../response/response.js'
 import { HttpStatusCode } from '../../response/httpCode.js'
 import User from '../../entities/User.js'
 import helpers from '../../lib/helpers.js'
-import { checkUser } from './validate.js'
+import { validateCreateUser, validateUpdate } from './validate.js'
 
 export const userModule = () => {
   const servicesUser = new DataJson()
@@ -15,12 +15,13 @@ export const userModule = () => {
     User,
     helpers.encryptPassword
   )
-  const userRouter = new UserRouter(
-    express.Router,
-    userCotroller,
+  const userRouter = new UserRouter({
+    router: express.Router,
+    controller: userCotroller,
     response,
-    HttpStatusCode,
-    checkUser
-  )
+    httpCode: HttpStatusCode,
+    checkUser: validateCreateUser,
+    checkUpdate: validateUpdate
+  })
   return userRouter._router
 }
