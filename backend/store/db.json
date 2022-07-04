@@ -44,6 +44,12 @@
       "_id": 7,
       "_username": "user2",
       "_password": "$2b$10$UQMbw0SpN5HtJcGERM5mKuzukHattHhyaUhHd28k39bhh0x9w.df6"
+    },
+    {
+      "_id": 8,
+      "_username": "user2",
+      "_email": "hola@gmail.com",
+      "_password": "$2b$10$dILWq0tBfR1ekuEZ/z.0YuMsBGy1HT4EMTeqcyANZjsXD7f9KGynO"
     }
   ],
   "song": [

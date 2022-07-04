@@ -6,7 +6,7 @@ import { response } from '../../response/response.js'
 import { HttpStatusCode } from '../../response/httpCode.js'
 import User from '../../entities/User.js'
 import helpers from '../../lib/helpers.js'
-import { validateCreateUser, validateUpdate } from './validate.js'
+import { validateCreateUser } from './validate.js'
 
 export const userModule = () => {
   const servicesUser = new DataJson()
@@ -20,8 +20,7 @@ export const userModule = () => {
     controller: userCotroller,
     response,
     httpCode: HttpStatusCode,
-    checkUser: validateCreateUser,
-    checkUpdate: validateUpdate
+    checkUser: validateCreateUser
   })
   return userRouter._router
 }
