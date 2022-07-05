@@ -42,7 +42,7 @@ class DataJson {
         return lastItem._id + 1
       }
     }
-    return 0
+    return 1
   }
 
   getDataFromTable(table) {
@@ -101,9 +101,9 @@ class DataJson {
     if (items[table]) {
       const index = data.findIndex((o) => o._id === idN)
       if (index !== -1) {
-        data.splice(index, 1)
+        const deletedObj = data.splice(index, 1)
         this.writeJsonFile(items)
-        return idN
+        return deletedObj[0]
       }
     }
     return null

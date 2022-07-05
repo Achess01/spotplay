@@ -35,12 +35,6 @@
       "_password": "$2b$10$VIU/aqLOPHkVBILivOtno.1qcPI1/h.XLnO0YsM.xqj58GNSpZCk."
     },
     {
-      "_id": 6,
-      "_username": "user2",
-      "_email": "newmail@new.com",
-      "_password": "$2b$10$Azh5A734OqDfgZI8BEG19.lDZuhQzkvdDEu3gM5Wx3szR8Os0EItS"
-    },
-    {
       "_id": 7,
       "_username": "user2",
       "_password": "$2b$10$UQMbw0SpN5HtJcGERM5mKuzukHattHhyaUhHd28k39bhh0x9w.df6"
@@ -90,5 +84,8 @@
       "_idGenre": 1
     }
   ],
-  "playlist": []
+  "playlist": [],
+  "role": [],
+  "artist": [],
+  "genre": []
 }
