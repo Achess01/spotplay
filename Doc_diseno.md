@@ -59,7 +59,7 @@ Para todos los endpoints se la dirección base es `/api/v1` ej:
 
 | **Endpoint** | **GET**    | **POST**       | **PUT**    | **DELETE**   |
 |--------------|------------|----------------|------------|--------------|
-| /playlist       | All playlists without songs | Create a playlist | -          | -            |
+| /playlist       | All playlists without songs. Query params: idOwner | Create a playlist | -          | -            |
 | /playlist/:id   | One playlist with songs | -              | Edit playlist | Delete playlist |
 | /playlist/:id/:idSong   | - | Add song to a playlist              | - | - |
 

@@ -113,8 +113,14 @@
     {
       "_id": 1,
       "_name": "Playlist para ponerse como Vin Diesel",
-      "_idOwner": "1",
+      "_idOwner": 1,
       "_description": "Canciones para hacer ejercicio"
+    },
+    {
+      "_id": 2,
+      "_name": "ejercicio2",
+      "_idOwner": 2,
+      "_description": "Canciones para hacer ejercicio dos veces"
     }
   ],
   "role": [
@@ -134,15 +140,14 @@
   ],
   "playlistSong": [
     {
-      "_id": 1
-    },
-    {
-      "_id": 2
-    },
-    {
       "_id": 3,
       "_idPlaylist": 1,
       "_idSong": 0
+    },
+    {
+      "_id": 4,
+      "_idPlaylist": 1,
+      "_idSong": 4
     }
   ]
 }

@@ -47,7 +47,8 @@ class PlaylistRouter {
   }
 
   handleGetPlaylists(req, res) {
-    const playlists = this._controller.getPlaylists()
+    const idOwner = req.query.idOwner || null
+    const playlists = this._controller.getPlaylists(idOwner)
     if (playlists) {
       this._response.success(req, res, playlists, this._httpCode.OK)
     } else {

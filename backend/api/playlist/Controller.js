@@ -13,8 +13,11 @@ class PlaylistController {
     return this._service.save('playlistSong', playlistSong)
   }
 
-  getPlaylists() {
-    const playlists = this._service.getDataFromTable('playlist')
+  getPlaylists(idOwner) {
+    let playlists = this._service.getDataFromTable('playlist')
+    if (idOwner !== null) {
+      playlists = playlists.filter((p) => p._idOwner === parseInt(idOwner))
+    }
     return playlists
   }
 
@@ -26,6 +29,14 @@ class PlaylistController {
 
   getPlaylist(id) {
     const playlist = this._service.getEntity('playlist', id)
+    if (!playlist) return null
+    const playlistSongs = this._service.getDataFromTable('playlistSong')
+    const songIds = playlistSongs
+      .filter((ps) => ps._idPlaylist === parseInt(id))
+      .map((ps) => ps._idSong)
+    const allSongs = this._service.getDataFromTable('song')
+    const selectedSongs = allSongs.filter((s) => songIds.includes(s._id))
+    playlist.songs = selectedSongs
     return playlist
   }
 
