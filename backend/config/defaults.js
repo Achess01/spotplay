@@ -10,5 +10,8 @@ export const config = {
   },
   db: {
     host: process.env.DB_HOST || 'localhost'
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET || 'secret'
   }
 }

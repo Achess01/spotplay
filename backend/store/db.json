@@ -51,6 +51,13 @@
       "_email": "achess@gmail.com",
       "_password": "$2b$10$jSZKmhDknzhiK7EB21CrCONjCz.rKUAOdR15cH0un/jFFljExURhu",
       "_roleId": null
+    },
+    {
+      "_id": 10,
+      "_username": "achess",
+      "_email": "achess@gmail.com",
+      "_password": "$2b$10$ZJgUuta6OH7Jp731NLBRHeivvKBKcnGe4NCML4sfwNyH6aGGwz74e",
+      "_roleId": null
     }
   ],
   "song": [

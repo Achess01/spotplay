@@ -4,6 +4,7 @@ import { userModule } from './user/index.js'
 import { artistModule } from './artist/index.js'
 import { genreModule } from './genre/index.js'
 import { roleModule } from './role/index.js'
+import { authModule } from './auth/index.js'
 import { playlistModule } from './playlist/index.js'
 import cors from 'cors'
 import morgan from 'morgan'
@@ -32,6 +33,7 @@ class Server {
     this._app.use('/api/v1/genre', genreModule())
     this._app.use('/api/v1/role', roleModule())
     this._app.use('/api/v1/playlist', playlistModule())
+    this._app.use('/api/v1/auth', authModule())
   }
 
   start() {
