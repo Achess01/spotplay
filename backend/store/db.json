@@ -58,6 +58,20 @@
       "_email": "achess@gmail.com",
       "_password": "$2b$10$ZJgUuta6OH7Jp731NLBRHeivvKBKcnGe4NCML4sfwNyH6aGGwz74e",
       "_roleId": null
+    },
+    {
+      "_id": 11,
+      "_username": "swagger",
+      "_email": "swagger@mail.com",
+      "_password": "$2b$10$tPkI.I6ApG7PGd2Hp1iGt.hYpjWz/LvYwVyNwaepOIP//zOZSwpSq",
+      "_roleId": 1
+    },
+    {
+      "_id": 12,
+      "_username": "string",
+      "_email": "string@hola.com",
+      "_password": "$2b$10$YptH/cII9NHuhnB19hvBPe2k/Q3cz2rFLd7X4sNM4FJyydmV9dXfK",
+      "_roleId": 0
     }
   ],
   "song": [

@@ -1,4 +1,11 @@
 import express from 'express'
+
+import swaggerUI from 'swagger-ui-express'
+import YAML from 'yamljs'
+// Configuracion de paths
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path' // Ubica el proyecto, une directorios
+
 import { songModule } from './song/index.js'
 import { userModule } from './user/index.js'
 import { artistModule } from './artist/index.js'
@@ -15,6 +22,10 @@ class Server {
     this._port = port
     this._hostname = hostname
     this._name = name
+    this._dirname = dirname(fileURLToPath(import.meta.url)) // Directorio del sevidor
+    this._swaggerFile = YAML.load(
+      join(dirname(fileURLToPath(import.meta.url)), '../docs/swagger.yaml')
+    )
     this.setMiddlewares()
     this.setRoutes()
   }
@@ -34,6 +45,11 @@ class Server {
     this._app.use('/api/v1/role', roleModule())
     this._app.use('/api/v1/playlist', playlistModule())
     this._app.use('/api/v1/auth', authModule())
+    this._app.use(
+      '/api/v1/docs',
+      swaggerUI.serve,
+      swaggerUI.setup(this._swaggerFile)
+    )
   }
 
   start() {
