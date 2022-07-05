@@ -20,7 +20,7 @@ class SongRouter {
     try {
       const artistId = req.query.artistId || null
       const genreId = req.query.genreId || null
-      let result = this._controller.getAllSongs()
+      const result = this._controller.getAllSongs({ artistId, genreId })
       if (!result) {
         this._response.success(
           req,
@@ -29,14 +29,6 @@ class SongRouter {
           this._httpCode.NOT_FOUND
         )
       } else {
-        if (artistId !== null) {
-          result = result.filter(
-            (song) => song._idArtist === parseInt(artistId)
-          )
-        }
-        if (genreId !== null) {
-          result = result.filter((song) => song._idGenre === parseInt(genreId))
-        }
         this._response.success(req, res, result, this._httpCode.OK)
       }
     } catch (error) {

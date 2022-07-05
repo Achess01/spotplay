@@ -13,8 +13,15 @@ class SongController {
     return song
   }
 
-  getAllSongs() {
-    const songs = this._service.getDataFromTable('song')
+  getAllSongs({ artistId, genreId }) {
+    let songs = this._service.getDataFromTable('song')
+    if (!songs) return null
+    if (artistId !== null) {
+      songs = songs.filter((song) => song._idArtist === parseInt(artistId))
+    }
+    if (genreId !== null) {
+      songs = songs.filter((song) => song._idGenre === parseInt(genreId))
+    }
     return songs
   }
 
