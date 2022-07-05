@@ -78,6 +78,17 @@ class DataJson {
     return null
   }
 
+  getAllByAttribute(tableName, attribute, value) {
+    const table = this.getDataFromTable(tableName)
+    if (table) {
+      const entity = table.filter((e) => e[attribute] === value)
+      if (entity) {
+        return entity
+      }
+    }
+    return null
+  }
+
   update(table, id, content) {
     const idN = parseInt(id)
     const items = this.readJsonFile()
