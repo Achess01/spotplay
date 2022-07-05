@@ -85,7 +85,13 @@
     }
   ],
   "playlist": [],
-  "role": [],
+  "role": [
+    {
+      "_id": 1,
+      "_name": "Editor",
+      "_description": "Capaz de agregar canciones y artistas"
+    }
+  ],
   "artist": [],
   "genre": [
     {

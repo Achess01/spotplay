@@ -4,6 +4,7 @@ class User {
     this._username = username
     this._email = email
     this._password = password
+    this._roleId = null
   }
 
   encryptPassword(password, hashPassword) {
