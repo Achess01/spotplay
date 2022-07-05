@@ -38,7 +38,7 @@ Para todos los endpoints se la dirección base es `/api/v1` ej:
 
 | **Endpoint** | **GET**   | **POST**      | **PUT**     | **DELETE**    |
 |--------------|-----------|---------------|-------------|---------------|
-| /song?genreId&artistId       | All songs | Create a song | -           | -             |
+| /song       | All songs. Query params: genreId, artistId | Create a song | -           | -             |
 | /song/:id    | One song  | -             | Edit a song | Delete a song |
 
 - Artist
