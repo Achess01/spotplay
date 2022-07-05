@@ -87,5 +87,11 @@
   "playlist": [],
   "role": [],
   "artist": [],
-  "genre": []
+  "genre": [
+    {
+      "_id": 1,
+      "_name": "Nueva Cumbia 2",
+      "_description": "Género de música para bailar en fiestas XD"
+    }
+  ]
 }
