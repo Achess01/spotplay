@@ -2,7 +2,7 @@ class Playlist {
   constructor({ name, idOwner, description }) {
     this._id = null
     this._name = name
-    this._idOwner = idOwner
+    this._idOwner = parseInt(idOwner)
     this._description = description
   }
 

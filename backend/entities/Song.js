@@ -5,8 +5,8 @@ class Song {
     this._uri = uri
     this._duration = duration
     this._image = image
-    this._idArtist = idArtist
-    this._idGenre = idGenre
+    this._idArtist = parseInt(idArtist)
+    this._idGenre = parseInt(idGenre)
   }
 
   get id() {

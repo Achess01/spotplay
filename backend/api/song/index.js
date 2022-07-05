@@ -5,6 +5,7 @@ import DataJson from '../../store/Data.js'
 import { response } from '../../response/response.js'
 import { HttpStatusCode } from '../../response/httpCode.js'
 import Song from '../../entities/Song.js'
+import { validateCreate } from './validate.js'
 
 export const songModule = () => {
   const servicesSong = new DataJson()
@@ -13,7 +14,8 @@ export const songModule = () => {
     express.Router,
     songCotroller,
     response,
-    HttpStatusCode
+    HttpStatusCode,
+    validateCreate
   )
   return songRouter._router
 }

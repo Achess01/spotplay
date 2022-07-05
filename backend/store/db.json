@@ -89,6 +89,24 @@
       "_image": "song.image",
       "_idArtist": 1,
       "_idGenre": 1
+    },
+    {
+      "_id": 4,
+      "_title": "Naila",
+      "_uri": "uri.com",
+      "_duration": "3:50",
+      "_image": "hola.image.cancion",
+      "_idArtist": 2,
+      "_idGenre": 1
+    },
+    {
+      "_id": 5,
+      "_title": "Naila",
+      "_uri": "uri.com",
+      "_duration": "3:50",
+      "_image": "hola.image.cancion",
+      "_idArtist": 2,
+      "_idGenre": 1
     }
   ],
   "playlist": [
