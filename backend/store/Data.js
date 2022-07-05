@@ -14,6 +14,7 @@ class DataJson {
       song: [],
       artist: [],
       playlist: [],
+      playlistSong: [],
       genre: []
     }
     if (items.length === 0) {

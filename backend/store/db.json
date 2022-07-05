@@ -44,6 +44,13 @@
       "_username": "user2",
       "_email": "hola@gmail.com",
       "_password": "$2b$10$dILWq0tBfR1ekuEZ/z.0YuMsBGy1HT4EMTeqcyANZjsXD7f9KGynO"
+    },
+    {
+      "_id": 9,
+      "_username": "achess",
+      "_email": "achess@gmail.com",
+      "_password": "$2b$10$jSZKmhDknzhiK7EB21CrCONjCz.rKUAOdR15cH0un/jFFljExURhu",
+      "_roleId": null
     }
   ],
   "song": [
@@ -84,7 +91,14 @@
       "_idGenre": 1
     }
   ],
-  "playlist": [],
+  "playlist": [
+    {
+      "_id": 1,
+      "_name": "Playlist para ponerse como Vin Diesel",
+      "_idOwner": "1",
+      "_description": "Canciones para hacer ejercicio"
+    }
+  ],
   "role": [
     {
       "_id": 1,
@@ -98,6 +112,19 @@
       "_id": 1,
       "_name": "Nueva Cumbia 2",
       "_description": "Género de música para bailar en fiestas XD"
+    }
+  ],
+  "playlistSong": [
+    {
+      "_id": 1
+    },
+    {
+      "_id": 2
+    },
+    {
+      "_id": 3,
+      "_idPlaylist": 1,
+      "_idSong": 0
     }
   ]
 }

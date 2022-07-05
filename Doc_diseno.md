@@ -61,6 +61,7 @@ Para todos los endpoints se la dirección base es `/api/v1` ej:
 |--------------|------------|----------------|------------|--------------|
 | /playlist       | All playlists without songs | Create a playlist | -          | -            |
 | /playlist/:id   | One playlist with songs | -              | Edit playlist | Delete playlist |
+| /playlist/:id/:idSong   | - | Add song to a playlist              | - | - |
 
 - User
 

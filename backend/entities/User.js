@@ -1,10 +1,10 @@
 class User {
-  constructor({ username, email, password }) {
+  constructor({ username, email, password, roleId = null }) {
     this._id = null
     this._username = username
     this._email = email
     this._password = password
-    this._roleId = null
+    this._roleId = roleId
   }
 
   encryptPassword(password, hashPassword) {

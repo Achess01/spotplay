@@ -10,7 +10,7 @@ class Playlist {
 }
 
 export class PlaylistSong {
-  constructor({ idPlaylist, idSong }) {
+  constructor(idPlaylist, idSong) {
     this._id = null
     this._idPlaylist = idPlaylist
     this._idSong = idSong
