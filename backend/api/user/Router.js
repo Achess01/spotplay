@@ -1,12 +1,5 @@
 class UserRouter {
-  constructor({
-    router,
-    controller,
-    response,
-    httpCode,
-    checkUser,
-    checkUpdate
-  }) {
+  constructor({ router, controller, response, httpCode, checkUser }) {
     this._router = router()
     this._controller = controller
     this._response = response
@@ -23,18 +16,27 @@ class UserRouter {
     this._router.put('/:id', this.handlePutUser.bind(this))
   }
 
-  handleSignUp(req, res) {
+  async handleSignUp(req, res) {
     try {
       const user = req.body
-      const result = this._controller.createNewUser(user)
-      this._response.success(req, res, result, this._httpCode.CREATED)
+      const result = await this._controller.createNewUser(user)
+      if (result) {
+        this._response.success(req, res, result, this._httpCode.CREATED)
+      } else {
+        this._response.error(
+          req,
+          res,
+          'Not created',
+          this._httpCode.BAD_REQUEST
+        )
+      }
     } catch (error) {
       this._response.error(req, res, error.message, this._httpCode.BAD_REQUEST)
     }
   }
 
-  handleGetUsers(req, res) {
-    const users = this._controller.getUsers()
+  async handleGetUsers(req, res) {
+    const users = await this._controller.getUsers()
     if (users) {
       this._response.success(req, res, users, this._httpCode.OK)
     } else {
@@ -42,9 +44,9 @@ class UserRouter {
     }
   }
 
-  handleGetUser(req, res) {
+  async handleGetUser(req, res) {
     const { id } = req.params
-    const user = this._controller.getUser(id)
+    const user = await this._controller.getUser(id)
     if (user) {
       this._response.success(req, res, user, this._httpCode.OK)
     } else {
@@ -52,9 +54,9 @@ class UserRouter {
     }
   }
 
-  handleDeleteUser(req, res) {
+  async handleDeleteUser(req, res) {
     const { id } = req.params
-    const deleted = this._controller.deleteUser(id)
+    const deleted = await this._controller.deleteUser(id)
     if (deleted) {
       this._response.success(req, res, deleted, this._httpCode.OK)
     } else {
@@ -62,10 +64,10 @@ class UserRouter {
     }
   }
 
-  handlePutUser(req, res) {
+  async handlePutUser(req, res) {
     const { id } = req.params
     const body = req.body
-    const updated = this._controller.updateUser(id, body)
+    const updated = await this._controller.updateUser(id, body)
     if (updated) {
       this._response.success(req, res, updated, this._httpCode.OK)
     } else {

@@ -8,13 +8,13 @@ class SongController {
     this._entity = entity
   }
 
-  getOneSong(id) {
-    const song = this._service.getEntity('song', id)
+  async getOneSong(id) {
+    const song = await this._service.getEntity('songs', id)
     return song
   }
 
-  getAllSongs({ artistId, genreId }) {
-    let songs = this._service.getDataFromTable('song')
+  async getAllSongs({ artistId, genreId }) {
+    let songs = await this._service.getDataFromTable('songs')
     if (!songs) return null
     if (artistId !== null) {
       songs = songs.filter((song) => song._idArtist === parseInt(artistId))
@@ -25,19 +25,27 @@ class SongController {
     return songs
   }
 
-  createNewSong(song) {
+  async createNewSong(song) {
     const songEntity = new this._entity(song)
-    const response = this._service.save('song', songEntity)
+    const { _title, _uri, _duration, _image, _idArtist, _idGenre } = songEntity
+    const response = await this._service.save('songs', {
+      _title,
+      _uri,
+      _duration,
+      _image,
+      _idArtist,
+      _idGenre
+    })
     return response
   }
 
-  updateSong(id, content) {
-    const updated = this._service.update('song', id, content)
+  async updateSong(id, content) {
+    const updated = await this._service.update('songs', id, content)
     return updated
   }
 
-  deleteSong(id) {
-    const deleted = this._service.delete('song', id)
+  async deleteSong(id) {
+    const deleted = await this._service.delete('songs', id)
     return deleted
   }
 }

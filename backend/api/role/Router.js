@@ -16,18 +16,18 @@ class RoleRouter {
     this._router.delete('/:id', this.handleDeleteRole.bind(this))
   }
 
-  handlePostRole(req, res) {
+  async handlePostRole(req, res) {
     try {
       const role = req.body
-      const result = this._controller.createNewRole(role)
+      const result = await this._controller.createNewRole(role)
       this._response.success(req, res, result, this._httpCode.CREATED)
     } catch (error) {
       this._response.error(req, res, error.message, this._httpCode.BAD_REQUEST)
     }
   }
 
-  handleGetRoles(req, res) {
-    const roles = this._controller.getRoles()
+  async handleGetRoles(req, res) {
+    const roles = await this._controller.getRoles()
     if (roles) {
       this._response.success(req, res, roles, this._httpCode.OK)
     } else {
@@ -35,9 +35,9 @@ class RoleRouter {
     }
   }
 
-  handleGetRole(req, res) {
+  async handleGetRole(req, res) {
     const { id } = req.params
-    const role = this._controller.getRole(id)
+    const role = await this._controller.getRole(id)
     if (role) {
       this._response.success(req, res, role, this._httpCode.OK)
     } else {
@@ -45,9 +45,9 @@ class RoleRouter {
     }
   }
 
-  handleDeleteRole(req, res) {
+  async handleDeleteRole(req, res) {
     const { id } = req.params
-    const deleted = this._controller.deleteRole(id)
+    const deleted = await this._controller.deleteRole(id)
     if (deleted) {
       this._response.success(req, res, deleted, this._httpCode.OK)
     } else {
@@ -55,10 +55,10 @@ class RoleRouter {
     }
   }
 
-  handlePutRole(req, res) {
+  async handlePutRole(req, res) {
     const { id } = req.params
     const body = req.body
-    const updated = this._controller.updateRole(id, body)
+    const updated = await this._controller.updateRole(id, body)
     if (updated) {
       this._response.success(req, res, updated, this._httpCode.OK)
     } else {

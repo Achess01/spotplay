@@ -16,11 +16,11 @@ class SongRouter {
     this._router.delete('/:idSong', this.handleDeleteOneSong.bind(this))
   }
 
-  handleGetSong(req, res) {
+  async handleGetSong(req, res) {
     try {
       const artistId = req.query.artistId || null
       const genreId = req.query.genreId || null
-      const result = this._controller.getAllSongs({ artistId, genreId })
+      const result = await this._controller.getAllSongs({ artistId, genreId })
       if (!result) {
         this._response.success(
           req,
@@ -41,9 +41,9 @@ class SongRouter {
     }
   }
 
-  handlePostSong(req, res) {
+  async handlePostSong(req, res) {
     const song = req.body
-    const result = this._controller.createNewSong(song)
+    const result = await this._controller.createNewSong(song)
     if (result) {
       this._response.success(req, res, result, this._httpCode.CREATED)
     } else {
@@ -56,11 +56,11 @@ class SongRouter {
     }
   }
 
-  handleGetOneSong(req, res) {
+  async handleGetOneSong(req, res) {
     try {
       const { idSong } = req.params
       const idNumber = parseInt(idSong)
-      const song = this._controller.getOneSong(idNumber)
+      const song = await this._controller.getOneSong(idNumber)
       if (song) {
         this._response.success(req, res, song, this._httpCode.OK)
       } else {
@@ -76,10 +76,10 @@ class SongRouter {
     }
   }
 
-  handlePutOneSong(req, res) {
+  async handlePutOneSong(req, res) {
     const content = req.body
     const { idSong } = req.params
-    const updated = this._controller.updateSong(idSong, content)
+    const updated = await this._controller.updateSong(idSong, content)
     if (updated) {
       this._response.success(req, res, updated, this._httpCode.OK)
     } else {
@@ -87,9 +87,9 @@ class SongRouter {
     }
   }
 
-  handleDeleteOneSong(req, res) {
+  async handleDeleteOneSong(req, res) {
     const { idSong } = req.params
-    const deleted = this._controller.deleteSong(idSong)
+    const deleted = await this._controller.deleteSong(idSong)
     if (deleted) {
       this._response.success(req, res, deleted, this._httpCode.OK)
     } else {

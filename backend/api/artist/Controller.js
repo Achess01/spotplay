@@ -4,29 +4,29 @@ class ArtistController {
     this._entity = entity
   }
 
-  getArtists() {
-    const artists = this._service.getDataFromTable('artist')
+  async getArtists() {
+    const artists = await this._service.getDataFromTable('artists')
     return artists
   }
 
-  createNewArtist(artist) {
+  async createNewArtist(artist) {
     const newArtist = new this._entity(artist)
-    const response = this._service.save('artist', newArtist)
+    const response = await this._service.save('artists', newArtist)
     return response
   }
 
-  getArtist(id) {
-    const artist = this._service.getEntity('artist', id)
+  async getArtist(id) {
+    const artist = await this._service.getEntity('artists', id)
     return artist
   }
 
-  updateArtist(id, content) {
-    const updated = this._service.update('artist', id, content)
+  async updateArtist(id, content) {
+    const updated = await this._service.update('artists', id, content)
     return updated
   }
 
-  deleteArtist(id) {
-    const deleted = this._service.delete('artist', id)
+  async deleteArtist(id) {
+    const deleted = await this._service.delete('artists', id)
     return deleted
   }
 }

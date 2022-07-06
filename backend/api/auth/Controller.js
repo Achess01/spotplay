@@ -6,10 +6,10 @@ export default class AuthController {
     this._generateToken = generateToken
   }
 
-  userAuthentication(user) {
+  async userAuthentication(user) {
     try {
-      const founded = this._services.getEntityByAttribute(
-        'user',
+      const founded = await this._services.getEntityByAttribute(
+        'users',
         '_username',
         user.username
       )

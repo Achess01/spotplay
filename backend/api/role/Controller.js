@@ -4,29 +4,30 @@ class RoleController {
     this._entity = entity
   }
 
-  getRoles() {
-    const roles = this._service.getDataFromTable('role')
+  async getRoles() {
+    const roles = await this._service.getDataFromTable('roles')
     return roles
   }
 
-  createNewRole(role) {
+  async createNewRole(role) {
     const newRole = new this._entity(role)
-    const response = this._service.save('role', newRole)
+    const { _name, _description } = newRole
+    const response = await this._service.save('roles', { _name, _description })
     return response
   }
 
-  getRole(id) {
-    const role = this._service.getEntity('role', id)
+  async getRole(id) {
+    const role = await this._service.getEntity('roles', id)
     return role
   }
 
-  updateRole(id, content) {
-    const updated = this._service.update('role', id, content)
+  async updateRole(id, content) {
+    const updated = await this._service.update('roles', id, content)
     return updated
   }
 
-  deleteRole(id) {
-    const deleted = this._service.delete('role', id)
+  async deleteRole(id) {
+    const deleted = await this._service.delete('roles', id)
     return deleted
   }
 }

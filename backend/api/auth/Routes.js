@@ -11,9 +11,9 @@ export default class AuthRoute {
     this._router.post('/signin', this.handleSignIn.bind(this))
   }
 
-  handleSignIn(req, res) {
+  async handleSignIn(req, res) {
     try {
-      const auth = this._controller.userAuthentication(req.body)
+      const auth = await this._controller.userAuthentication(req.body)
       if (auth._auth) {
         this._response.success(req, res, auth, this._httpCode.OK)
       } else {

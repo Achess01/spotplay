@@ -5,35 +5,40 @@ class UserController {
     this._hashPassword = hashPassowrd
   }
 
-  getUsers() {
-    const users = this._service.getDataFromTable('user')
+  async getUsers() {
+    const users = await this._service.getDataFromTable('users')
     return users
   }
 
-  createNewUser(user) {
+  async createNewUser(user) {
     const newUser = new this._entity(user)
     newUser.encryptPassword(user.password, this._hashPassword)
-    const response = this._service.save('user', newUser)
+    const response = await this._service.save('users', {
+      _username: newUser._username,
+      _email: newUser._email,
+      _password: newUser._password,
+      _roleid: newUser._roleId
+    })
     return response
   }
 
-  getUser(id) {
-    const user = this._service.getEntity('user', id)
+  async getUser(id) {
+    const user = await this._service.getEntity('users', id)
     return user
   }
 
-  updateUser(id, content) {
+  async updateUser(id, content) {
     const { _password } = content
     if (_password) {
       const newPass = this._hashPassword(_password)
       content._password = newPass
     }
-    const updated = this._service.update('user', id, content)
+    const updated = await this._service.update('users', id, content)
     return updated
   }
 
-  deleteUser(id) {
-    const deleted = this._service.delete('user', id)
+  async deleteUser(id) {
+    const deleted = await this._service.delete('users', id)
     return deleted
   }
 }
