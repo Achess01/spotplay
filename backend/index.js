@@ -1,12 +1,4 @@
-import express from 'express'
+import main from './api/index.js'
+import { config } from './config/defaults.js'
 
-const app = express()
-const port = 3000
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`http://localhost:${port}`)
-})
+main(config.api)
