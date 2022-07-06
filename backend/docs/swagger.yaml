@@ -93,16 +93,47 @@ components:
           type: string
         _roleId:        
           type: integer
-          format: int64  
-          
-    UserPut:
+          format: int64 
+    
+    Artist:
       type: object
       properties:
-        _username:
+        firstName:
           type: string
-        _email:
+        lastName:
           type: string
-        _password:
+        avatarUri:
+          type: string
+    
+    ArtistResponse:
+      type: object
+      properties:
+        _id:
+          type: integer
+          format: int64
+        _firstName:
+          type: string
+        _lastName:
+          type: string
+        _avatarUri:
+          type: string
+    
+    Genre:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          
+    GenreResponse:
+      type: object
+      properties:
+        _id:
+          type: integer
+        _name:
+          type: string
+        _description:
           type: string
           
 paths:
@@ -128,7 +159,7 @@ paths:
                 $ref: '#/components/schemas/UserResponse'
         400:
           description: Bad request
-        content: {}
+          content: {}
   /user:
     get:
       tags:
@@ -182,7 +213,14 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: '#/components/schemas/UserPut'
+                type: object
+                properties:
+                  _username:
+                    type: string
+                  _email:
+                    type: string
+                  _password:
+                    type: string
       parameters:
         - in: path
           name: id
@@ -201,3 +239,422 @@ paths:
         400:
           description: Bad request
           content: {}
+          
+    delete:
+      tags:
+      - User
+      summary: Eliminar usuario
+      description: Elimina un usuario en específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del usuario
+      responses:
+        200:
+          description: Eliminado con éxito
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/UserResponse'
+        400:
+          description: Bad request
+          content: {}
+          
+# routes for song
+  /song:
+    post:
+      tags:
+      - Song
+      summary: Crear un usuario
+      description: Se creará un usuario para utilizarlo en la aplicación
+      requestBody: 
+        description: El atriburo role es opcional
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Song'
+      responses:
+        201:
+          description: "Registro exitoso"
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SongResponse'
+        400:
+          description: Bad request
+          content: {}
+          
+    get:
+      tags:
+      - Song
+      summary: Todos los usuarios
+      description: Retorna todos los usuarios de la plataforma
+      parameters:
+        - in: query
+          name: genreId
+          schema:
+            type: integer
+        - in: query
+          name: artistId
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Array de todos los usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/SongResponse'
+        400:
+          description: Bad request
+          content: {}
+  /song/{id}:
+    get:
+      tags:
+      - Song
+      summary: Usuario por id
+      description: Retorna un usuario con un id específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del usuario
+      responses:
+        200:
+          description: Usuario solicitado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/SongResponse'
+        400:
+          description: Bad request
+          content: {}
+
+    put:
+      tags:
+      - Song
+      summary: Actualizar usuario
+      description: Actualiza un usuario en específico
+      requestBody: 
+        description: Al menos uno de todos los atributos
+        content: 
+          application/json:
+            schema:
+                type: object
+                properties:
+                  _title:
+                    type: string
+                  _uri:
+                    type: string
+                  _duration:
+                    type: string
+                  _image:
+                    type: string
+                  _idArtist:
+                    type: integer
+                    format: int64
+                  _idGenre: 
+                    type: integer
+                    format: int64
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del usuario
+      responses:
+        200:
+          description: Actualizado con éxito
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/SongResponse'
+        400:
+          description: Bad request
+          content: {}
+          
+    delete:
+      tags:
+      - Song
+      summary: Eliminar usuario
+      description: Elimina un usuario en específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del usuario
+      responses:
+        200:
+          description: Eliminado con éxito
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/SongResponse'
+        400:
+          description: Bad request
+          content: {}
+
+# routes for artist
+  /artist:
+    post:
+      tags:
+      - Artist
+      summary: Crear un artista
+      description: Se creará un artista para utilizarlo en la aplicación
+      requestBody: 
+        description: Propiedades para crear un artista 
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Artist'
+      responses:
+        201:
+          description: "Registro exitoso"
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtistResponse'
+        400:
+          description: Bad request
+          content: {}
+          
+    get:
+      tags:
+      - Artist
+      summary: Todos los artistas
+      description: Retorna todos los artistas de la plataforma
+      responses:
+        200:
+          description: Array de todos los artistas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/ArtistResponse'
+        400:
+          description: Bad request
+          content: {}
+  /artist/{id}:
+    get:
+      tags:
+      - Artist
+      summary: Artista por id
+      description: Retorna un artista con un id específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del artista
+      responses:
+        200:
+          description: Artista solicitado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ArtistResponse'
+        400:
+          description: Bad request
+          content: {}
+    put:
+      tags:
+      - Artist
+      summary: Actualizar artista
+      description: Actualiza un artista en específico
+      requestBody: 
+        description: Al menos uno de todos los atributos
+        content: 
+          application/json:
+            schema:
+                type: object
+                properties:
+                  _lastName:
+                    type: string
+                  _firstName:
+                    type: string
+                  _avatarUri:
+                    type: string
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del artista
+      responses:
+        200:
+          description: Artista solicitado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ArtistResponse'
+        400:
+          description: Bad request
+          content: {}
+          
+    delete:
+      tags:
+      - Artist
+      summary: Eliminar artista
+      description: Elimina un artista en específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del artista
+      responses:
+        200:
+          description: Eliminado con éxito
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ArtistResponse'
+        400:
+          description: Bad request
+          content: {}
+
+# routes for genre
+  /genre:
+    post:
+      tags:
+      - Genre
+      summary: Crear un género
+      description: Se creará un género para utilizarlo en la aplicación
+      requestBody: 
+        description: Propiedades para crear un género 
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Genre'
+      responses:
+        201:
+          description: "Registro exitoso"
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreResponse'
+        400:
+          description: Bad request
+          content: {}
+          
+    get:
+      tags:
+      - Genre
+      summary: Todos los géneros
+      description: Retorna todos los géneros de la plataforma      
+      responses:
+        200:
+          description: Array de todos los géneros
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/GenreResponse'
+        400:
+          description: Bad request
+          content: {}
+  /genre/{id}:
+    get:
+      tags:
+      - Genre
+      summary: Género por id
+      description: Retorna un género con un id específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del género
+      responses:
+        200:
+          description: Género solicitado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/GenreResponse'
+        400:
+          description: Bad request
+          content: {}
+    put:
+      tags:
+      - Genre
+      summary: Actualizar género
+      description: Actualiza un género en específico
+      requestBody: 
+        description: Al menos uno de todos los atributos
+        content: 
+          application/json:
+            schema:
+                type: object
+                properties:
+                  _name:
+                    type: string
+                  _description:
+                    type: string                  
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del género
+      responses:
+        200:
+          description: Género solicitado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/GenreResponse'
+        400:
+          description: Bad request
+          content: {}
+          
+    delete:
+      tags:
+      - Genre
+      summary: Eliminar género
+      description: Elimina un género en específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del género
+      responses:
+        200:
+          description: Eliminado con éxito
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/GenreResponse'
+        400:
+          description: Bad request
+          content: {}
+
