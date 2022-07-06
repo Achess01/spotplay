@@ -232,7 +232,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del usuario
       responses:
         200:
@@ -269,7 +269,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del usuario
       responses:
         200:
@@ -293,7 +293,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del usuario
       responses:
         200:
@@ -368,7 +368,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID de la canción
       responses:
         200:
@@ -413,7 +413,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID de la canción
       responses:
         200:
@@ -437,7 +437,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del canción
       responses:
         200:
@@ -503,7 +503,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del artista
       responses:
         200:
@@ -539,7 +539,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del artista
       responses:
         200:
@@ -563,7 +563,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del artista
       responses:
         200:
@@ -629,7 +629,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del género
       responses:
         200:
@@ -663,7 +663,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del género
       responses:
         200:
@@ -687,7 +687,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del género
       responses:
         200:
@@ -753,7 +753,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del playlist
       responses:
         200:
@@ -787,7 +787,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del playlist
       responses:
         200:
@@ -811,7 +811,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID de la playlist
       responses:
         200:
@@ -836,14 +836,13 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID de la playlist
         - in: path
           name: idSong
           required: true
           schema:
-            type: integer
-            minimun: 1
+            type: integer            
           description: ID de la canción
       responses:
         201:
@@ -910,7 +909,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del rol
       responses:
         200:
@@ -944,7 +943,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del rol
       responses:
         200:
@@ -968,7 +967,7 @@ paths:
           required: true
           schema:
             type: integer
-            minimum: 1
+            
           description: ID del rol
       responses:
         200:

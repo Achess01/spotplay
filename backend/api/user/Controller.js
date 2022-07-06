@@ -23,6 +23,11 @@ class UserController {
   }
 
   updateUser(id, content) {
+    const { _password } = content
+    if (_password) {
+      const newPass = this._hashPassword(_password)
+      content._password = newPass
+    }
     const updated = this._service.update('user', id, content)
     return updated
   }
