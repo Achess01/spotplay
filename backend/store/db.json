@@ -65,13 +65,6 @@
       "_email": "swagger@mail.com",
       "_password": "$2b$10$tPkI.I6ApG7PGd2Hp1iGt.hYpjWz/LvYwVyNwaepOIP//zOZSwpSq",
       "_roleId": 1
-    },
-    {
-      "_id": 12,
-      "_username": "string",
-      "_email": "string@hola.com",
-      "_password": "$2b$10$YptH/cII9NHuhnB19hvBPe2k/Q3cz2rFLd7X4sNM4FJyydmV9dXfK",
-      "_roleId": 0
     }
   ],
   "song": [
@@ -86,15 +79,6 @@
     },
     {
       "_id": 1,
-      "_title": "song1",
-      "_uri": "uri.com",
-      "_duration": "3.5",
-      "_image": "song.image",
-      "_idArtist": 1,
-      "_idGenre": 1
-    },
-    {
-      "_id": 2,
       "_title": "song1",
       "_uri": "uri.com",
       "_duration": "3.5",
@@ -156,7 +140,7 @@
     {
       "_id": 1,
       "_name": "Nueva Cumbia 2",
-      "_description": "Género de música para bailar en fiestas XD"
+      "_description": "string"
     }
   ],
   "playlistSong": [
@@ -169,6 +153,31 @@
       "_id": 4,
       "_idPlaylist": 1,
       "_idSong": 4
+    },
+    {
+      "_id": 5,
+      "_idPlaylist": 1,
+      "_idSong": 1
+    },
+    {
+      "_id": 6,
+      "_idPlaylist": 2,
+      "_idSong": 4
+    },
+    {
+      "_id": 7,
+      "_idPlaylist": 2,
+      "_idSong": 4
+    },
+    {
+      "_id": 8,
+      "_idPlaylist": 2,
+      "_idSong": 5
+    },
+    {
+      "_id": 9,
+      "_idPlaylist": 2,
+      "_idSong": 1
     }
   ]
 }

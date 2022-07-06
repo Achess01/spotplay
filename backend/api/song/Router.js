@@ -78,8 +78,8 @@ class SongRouter {
 
   handlePutOneSong(req, res) {
     const content = req.body
-    const { id } = req.params
-    const updated = this._controller.updateSong(id, content)
+    const { idSong } = req.params
+    const updated = this._controller.updateSong(idSong, content)
     if (updated) {
       this._response.success(req, res, updated, this._httpCode.OK)
     } else {
@@ -88,8 +88,8 @@ class SongRouter {
   }
 
   handleDeleteOneSong(req, res) {
-    const { id } = req.params
-    const deleted = this._controller.deleteSong(id)
+    const { idSong } = req.params
+    const deleted = this._controller.deleteSong(idSong)
     if (deleted) {
       this._response.success(req, res, deleted, this._httpCode.OK)
     } else {

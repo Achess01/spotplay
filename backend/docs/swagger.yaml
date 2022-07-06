@@ -24,7 +24,9 @@ tags:
     description: "Usuarios de la plataforma"
   - name: Role  
     description: "Rol de cada usuario"
-    
+  - name: Auth
+    description: Sign In
+
 components:
   schemas: 
     Song:
@@ -135,7 +137,47 @@ components:
           type: string
         _description:
           type: string
+    
+    Playlist:
+      type: object
+      properties:
+        name:
+          type: string
+        idOwner: 
+          type: integer
+        description:
+          type: string
           
+    PlaylistResponse:
+      type: object
+      properties:
+        _id:
+          type: integer
+        _name:
+          type: string
+        _idOwner: 
+          type: integer
+        _description:
+          type: string
+          
+    Role:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          
+    RoleResponse:
+      type: object
+      properties:
+        _id:
+          type: integer
+        _name:
+          type: string
+        _description:
+          type: string
+
 paths:
   /user/signup:
     post:
@@ -269,10 +311,10 @@ paths:
     post:
       tags:
       - Song
-      summary: Crear un usuario
-      description: Se creará un usuario para utilizarlo en la aplicación
+      summary: Crear ua canción
+      description: Se creará una canción para utilizarla en la aplicación
       requestBody: 
-        description: El atriburo role es opcional
+        description: Atributos de una canción
         content: 
           application/json:
             schema:
@@ -291,8 +333,8 @@ paths:
     get:
       tags:
       - Song
-      summary: Todos los usuarios
-      description: Retorna todos los usuarios de la plataforma
+      summary: Todos las canciones
+      description: Retorna todas las canciones de la plataforma
       parameters:
         - in: query
           name: genreId
@@ -304,7 +346,7 @@ paths:
             type: integer
       responses:
         200:
-          description: Array de todos los usuarios
+          description: Array de todos las canciones
           content:
             application/json:
               schema:
@@ -318,8 +360,8 @@ paths:
     get:
       tags:
       - Song
-      summary: Usuario por id
-      description: Retorna un usuario con un id específico
+      summary: Canción por id
+      description: Retorna una canción con un id específico
       parameters:
         - in: path
           name: id
@@ -327,10 +369,10 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: ID del usuario
+          description: ID de la canción
       responses:
         200:
-          description: Usuario solicitado
+          description: Canción solicitado
           content:
             application/json:
               schema:
@@ -342,8 +384,8 @@ paths:
     put:
       tags:
       - Song
-      summary: Actualizar usuario
-      description: Actualiza un usuario en específico
+      summary: Actualizar canción
+      description: Actualiza un canción en específico
       requestBody: 
         description: Al menos uno de todos los atributos
         content: 
@@ -372,7 +414,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: ID del usuario
+          description: ID de la canción
       responses:
         200:
           description: Actualizado con éxito
@@ -387,8 +429,8 @@ paths:
     delete:
       tags:
       - Song
-      summary: Eliminar usuario
-      description: Elimina un usuario en específico
+      summary: Eliminar canción
+      description: Elimina una canción en específico
       parameters:
         - in: path
           name: id
@@ -396,7 +438,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: ID del usuario
+          description: ID del canción
       responses:
         200:
           description: Eliminado con éxito
@@ -432,7 +474,7 @@ paths:
           description: Bad request
           content: {}
           
-    get:
+    get:  
       tags:
       - Artist
       summary: Todos los artistas
@@ -658,3 +700,323 @@ paths:
           description: Bad request
           content: {}
 
+# routes for playlist
+  /playlist:
+    post:
+      tags:
+      - Playlist
+      summary: Crear una playlist
+      description: Se creará una playlist para utilizarla en la aplicación
+      requestBody: 
+        description: Propiedades para crear una playlist 
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Playlist'
+      responses:
+        201:
+          description: "Registro exitoso"
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistResponse'
+        400:
+          description: Bad request
+          content: {}
+          
+    get:
+      tags:
+      - Playlist
+      summary: Todos los playlists
+      description: Retorna todos los playlists de la plataforma      
+      responses:
+        200:
+          description: Array de todos las playlists
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/PlaylistResponse'
+        400:
+          description: Bad request
+          content: {}
+  /playlist/{id}:
+    get:
+      tags:
+      - Playlist
+      summary: Playlist por id
+      description: Retorna una playlist con un id específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del playlist
+      responses:
+        200:
+          description: Playlist solicitado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/PlaylistResponse'
+        400:
+          description: Bad request
+          content: {}
+    put:
+      tags:
+      - Playlist
+      summary: Actualizar playlist
+      description: Actualiza una playlist en específico
+      requestBody: 
+        description: Al menos uno de todos los atributos
+        content: 
+          application/json:
+            schema:
+                type: object
+                properties:
+                  _name:
+                    type: string
+                  _description:
+                    type: string                  
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del playlist
+      responses:
+        200:
+          description: Playlist solicitado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/PlaylistResponse'
+        400:
+          description: Bad request
+          content: {}
+          
+    delete:
+      tags:
+      - Playlist
+      summary: Eliminar playlist
+      description: Elimina una playlist en específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID de la playlist
+      responses:
+        200:
+          description: Eliminado con éxito
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/PlaylistResponse'
+        400:
+          description: Bad request
+          content: {}
+  
+  /playlist/{id}/{idSong}:
+    post:
+      tags:
+      - Playlist
+      summary: Agregar una canción
+      description: Agregar una canción (idSong) a una playlist (id)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID de la playlist
+        - in: path
+          name: idSong
+          required: true
+          schema:
+            type: integer
+            minimun: 1
+          description: ID de la canción
+      responses:
+        201:
+          description: Canción agregada
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/PlaylistResponse'
+        400:
+          description: Bad request
+          content: {}
+        
+
+# routes for role
+  /role:
+    post:
+      tags:
+      - Role
+      summary: Crear un rol
+      description: Se creará un rol para utilizarlo en la aplicación
+      requestBody: 
+        description: Propiedades para crear un rol 
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+      responses:
+        201:
+          description: "Registro exitoso"
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+        400:
+          description: Bad request
+          content: {}
+          
+    get:
+      tags:
+      - Role
+      summary: Todos los roles
+      description: Retorna todos los artistas de la plataforma
+      responses:
+        200:
+          description: Array de todos los artistas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/RoleResponse'
+        400:
+          description: Bad request
+          content: {}
+  /role/{id}:
+    get:
+      tags:
+      - Role
+      summary: Rol por id
+      description: Retorna un rol con un id específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del rol
+      responses:
+        200:
+          description: Rol solicitado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/RoleResponse'
+        400:
+          description: Bad request
+          content: {}
+    put:
+      tags:
+      - Role
+      summary: Actualizar rol
+      description: Actualiza un rol en específico
+      requestBody: 
+        description: Al menos uno de todos los atributos
+        content: 
+          application/json:
+            schema:
+                type: object
+                properties:
+                  _name:
+                    type: string
+                  _description:
+                    type: string                  
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del rol
+      responses:
+        200:
+          description: Rol solicitado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/RoleResponse'
+        400:
+          description: Bad request
+          content: {}
+          
+    delete:
+      tags:
+      - Role
+      summary: Eliminar rol
+      description: Elimina un rol en específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID del rol
+      responses:
+        200:
+          description: Eliminado con éxito
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/RoleResponse'
+        400:
+          description: Bad request
+          content: {}
+
+  /auth/signin:
+    post:
+      tags:
+      - Auth
+      summary: Signin
+      operationId: Signin
+      description: Se inicia sesión en la app
+      requestBody: 
+        description: Cuerpo para iniciar sesión
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties: 
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: "Login exitoso"
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _auth:
+                    type: boolean
+                  _username:
+                    type: string
+                  _email:
+                    type: string
+                  _token:
+                    type: string
+                  _message:
+                    type: string
+        400:
+          description: Bad request
+          content: {}
