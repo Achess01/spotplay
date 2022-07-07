@@ -13,8 +13,12 @@ class SongController {
     return song
   }
 
-  async getAllSongs({ artistId, genreId }) {
-    let songs = await this._service.getDataFromTable('songs')
+  async getAllSongs({ artistId, genreId, title }) {
+    let query = null
+    if (title) {
+      query = { _title: { $regex: '.*' + title + '.*' } }
+    }
+    let songs = await this._service.getDataFromTable('songs', query)
     if (!songs) return null
     if (artistId !== null) {
       songs = songs.filter((song) => song._idArtist === parseInt(artistId))

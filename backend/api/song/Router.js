@@ -20,7 +20,8 @@ class SongRouter {
     try {
       const artistId = req.query.artistId || null
       const genreId = req.query.genreId || null
-      const result = await this._controller.getAllSongs({ artistId, genreId })
+      const title = req.query.title || null
+      const result = await this._controller.getAllSongs({ artistId, genreId, title })
       if (!result) {
         this._response.success(
           req,

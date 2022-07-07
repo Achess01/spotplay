@@ -16,62 +16,92 @@ const mongodb = async () => {
 
 export default class DBMongo {
   constructor() {
+    this._models = models
     mongodb()
   }
 
   async save(table, data) {
-    if (!models[table]) return null
-    const model = models[table]
-    const newData = model(data)
-    const res = await newData.save()
-    console.log(res)
-    return 'ok'
+    try {
+      if (!this._models[table]) return null
+      const model = models[table]
+      const newData = model(data)
+      const res = await newData.save()
+      console.log(res)
+      return 'ok'
+    } catch {
+      return null
+    }
   }
 
-  async getDataFromTable(table) {
-    if (!models[table]) return null
-    const model = models[table]
-    const res = await model.find()
-    return res
+  async getDataFromTable(table, extra) {
+    try {
+      if (!this._models[table]) return null
+      const model = models[table]
+      const searchQuery = extra || {}
+      const res = await model.find(searchQuery)
+      return res
+    } catch {
+      return null
+    }
   }
 
   async delete(table, id) {
-    if (!this._models[table]) return null
-    const model = this._models[table]
-    const res = await model.findByIdAndDelete(id)
-    return res
+    try {
+      if (!this._models[table]) return null
+      const model = this._models[table]
+      const res = await model.findByIdAndDelete(id)
+      return res
+    } catch {
+      return null
+    }
   }
 
   async update(table, id, data) {
-    if (!this._models[table]) return null
-    const model = this._models[table]
-    const res = await model.findByIdAndUpdate(id, data)
-    return res
+    try {
+      if (!this._models[table]) return null
+      const model = this._models[table]
+      const res = await model.findByIdAndUpdate(id, data)
+      return res
+    } catch {
+      return null
+    }
   }
 
   async getEntity(table, id) {
-    if (!this._models[table]) return null
-    const model = this._models[table]
-    const res = await model.findById(id)
-    return res
+    try {
+      if (!this._models[table]) return null
+      const model = this._models[table]
+      const res = await model.findById(id)
+      return res
+    } catch {
+      return null
+    }
   }
 
   async getEntityByAttribute(table, attribute, value) {
-    if (!this._models[table]) return null
-    const model = this._models[table]
-    const queryObj = {}
-    queryObj[attribute] = value
-    const res = await model.findOne(queryObj)
-    return res
+    try {
+      if (!this._models[table]) return null
+      const model = this._models[table]
+      const queryObj = {}
+      queryObj[attribute] = value
+      const res = await model.findOne(queryObj)
+      return res
+    } catch {
+      return null
+    }
   }
 
-  async getAllByAttribute(table, attribute, value) {
-    if (!this._models[table]) return null
-    const model = this._models[table]
-    const queryObj = {}
-    queryObj[attribute] = value
-    const res = await model.find(queryObj)
-    return res
+  async getAllByAttribute(table, attribute, value, extra) {
+    try {
+      if (!this._models[table]) return null
+      const model = this._models[table]
+      const queryObj = {}
+      queryObj[attribute] = value
+      const res = await model.find(queryObj)
+      return res
+    } catch {
+      return null
+    }
   }
 }
 

@@ -231,7 +231,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del usuario
       responses:
@@ -268,7 +268,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del usuario
       responses:
@@ -292,7 +292,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del usuario
       responses:
@@ -339,11 +339,15 @@ paths:
         - in: query
           name: genreId
           schema:
-            type: integer
+            type: string
         - in: query
           name: artistId
           schema:
-            type: integer
+            type: string
+        - in: query
+          name: title
+          schema:
+            type: string
       responses:
         200:
           description: Array de todos las canciones
@@ -367,7 +371,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID de la canción
       responses:
@@ -412,7 +416,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID de la canción
       responses:
@@ -436,7 +440,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del canción
       responses:
@@ -502,7 +506,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del artista
       responses:
@@ -538,7 +542,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del artista
       responses:
@@ -562,7 +566,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del artista
       responses:
@@ -628,7 +632,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del género
       responses:
@@ -662,7 +666,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del género
       responses:
@@ -686,7 +690,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del género
       responses:
@@ -752,7 +756,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del playlist
       responses:
@@ -786,7 +790,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del playlist
       responses:
@@ -810,7 +814,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID de la playlist
       responses:
@@ -835,7 +839,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID de la playlist
         - in: path
@@ -908,7 +912,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del rol
       responses:
@@ -942,7 +946,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del rol
       responses:
@@ -966,7 +970,7 @@ paths:
           name: id
           required: true
           schema:
-            type: integer
+            type: string
             
           description: ID del rol
       responses:
