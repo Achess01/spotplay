@@ -31,7 +31,7 @@ const helpers = {
       refresh_token: config.email.refreshToken
     })
     const myAccessToken = myOAuth2Client.getAccessToken()
-    return nodemailer.createTransport({
+    const transport = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         type: 'OAuth2',
@@ -42,6 +42,7 @@ const helpers = {
         accessToken: myAccessToken // access token variable we defined earlier
       }
     })
+    return transport
   },
   emailData: config.email
 }

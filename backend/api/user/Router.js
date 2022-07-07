@@ -37,6 +37,7 @@ class UserRouter {
         )
       }
     } catch (error) {
+      console.log(error)
       this._response.error(req, res, error.message, this._httpCode.BAD_REQUEST)
     }
   }

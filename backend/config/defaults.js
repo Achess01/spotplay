@@ -19,5 +19,8 @@ export const config = {
     clientSecret: process.env.CLIENT_SECRET,
     refreshToken: process.env.REFRESH_TOKEN,
     email: process.env.EMAIL
+  },
+  dbmongo: {
+    uri: process.env.MONGO_URI
   }
 }
