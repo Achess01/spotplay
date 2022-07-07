@@ -15,7 +15,9 @@ export const authModule = () => {
     services: authServices,
     entity: Auth,
     comparePassword: helpers.comparePassword,
-    generateToken: helpers.generateToken
+    generateToken: helpers.generateToken,
+    email: helpers.createTransport(),
+    emailDir: helpers.emailData
   })
   const authRoute = new AuthRoute(
     Router,

@@ -19,8 +19,14 @@ class UserRouter {
   async handleSignUp(req, res) {
     try {
       const user = req.body
+      const to = user.email // email for sending registration message
       const result = await this._controller.createNewUser(user)
       if (result) {
+        this._controller.sendEmail(
+          to,
+          'Registro Exitoso',
+          `Hola ${user.username}, Tu registro a Spotplay se ha realizado`
+        )
         this._response.success(req, res, result, this._httpCode.CREATED)
       } else {
         this._response.error(

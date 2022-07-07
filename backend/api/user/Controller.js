@@ -1,8 +1,27 @@
 class UserController {
-  constructor(service, entity, hashPassowrd) {
+  constructor(service, entity, hashPassowrd, transport, emailDir) {
     this._service = service
     this._entity = entity
     this._hashPassword = hashPassowrd
+    this._transport = transport
+    this._emailDir = emailDir
+  }
+
+  sendEmail(to, subject, text) {
+    const mailDetails = {
+      from: this._emailDir,
+      to,
+      subject,
+      text
+    }
+
+    this._transport.sendMail(mailDetails, (err, data) => {
+      if (err) {
+        console.error(err)
+      } else {
+        console.log(`Email sent to ${to}`)
+      }
+    })
   }
 
   async getUsers() {

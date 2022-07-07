@@ -15,7 +15,9 @@ export const userModule = () => {
   const userCotroller = new UserController(
     servicesUser,
     User,
-    helpers.encryptPassword
+    helpers.encryptPassword,
+    helpers.createTransport(),
+    helpers.emailData
   )
   const userRouter = new UserRouter({
     router: express.Router,

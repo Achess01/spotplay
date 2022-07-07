@@ -13,5 +13,11 @@ export const config = {
   },
   jwt: {
     secret: process.env.JWT_SECRET || 'secret'
+  },
+  email: {
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    refreshToken: process.env.REFRESH_TOKEN,
+    email: process.env.EMAIL
   }
 }
