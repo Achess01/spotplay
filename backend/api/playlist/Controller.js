@@ -45,7 +45,6 @@ class PlaylistController {
       if (songIds.includes(s._id.toString())) return true
       return false
     })
-    
 
     return { ...playlist._doc, songs: selectedSongs }
   }
