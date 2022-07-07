@@ -21,9 +21,9 @@ class PlaylistRouter {
     this._router.delete('/:id', this.handleDeletePlaylist.bind(this))
   }
 
-  handleAddSong(req, res) {
+  async handleAddSong(req, res) {
     const { id, idSong } = req.params
-    const added = this._controller.addSong(id, idSong)
+    const added = await this._controller.addSong(id, idSong)
     if (added) {
       this._response.success(req, res, added, this._httpCode.CREATED)
     } else {
@@ -36,19 +36,19 @@ class PlaylistRouter {
     }
   }
 
-  handlePostPlaylist(req, res) {
+  async handlePostPlaylist(req, res) {
     try {
       const playlist = req.body
-      const result = this._controller.createNewPlaylist(playlist)
+      const result = await this._controller.createNewPlaylist(playlist)
       this._response.success(req, res, result, this._httpCode.CREATED)
     } catch (error) {
       this._response.error(req, res, error.message, this._httpCode.BAD_REQUEST)
     }
   }
 
-  handleGetPlaylists(req, res) {
+  async handleGetPlaylists(req, res) {
     const idOwner = req.query.idOwner || null
-    const playlists = this._controller.getPlaylists(idOwner)
+    const playlists = await this._controller.getPlaylists(idOwner)
     if (playlists) {
       this._response.success(req, res, playlists, this._httpCode.OK)
     } else {
@@ -56,9 +56,9 @@ class PlaylistRouter {
     }
   }
 
-  handleGetPlaylist(req, res) {
+  async handleGetPlaylist(req, res) {
     const { id } = req.params
-    const playlist = this._controller.getPlaylist(id)
+    const playlist = await this._controller.getPlaylist(id)
     if (playlist) {
       this._response.success(req, res, playlist, this._httpCode.OK)
     } else {
@@ -66,9 +66,9 @@ class PlaylistRouter {
     }
   }
 
-  handleDeletePlaylist(req, res) {
+  async handleDeletePlaylist(req, res) {
     const { id } = req.params
-    const deleted = this._controller.deletePlaylist(id)
+    const deleted = await this._controller.deletePlaylist(id)
     if (deleted) {
       this._response.success(req, res, deleted, this._httpCode.OK)
     } else {
@@ -76,10 +76,10 @@ class PlaylistRouter {
     }
   }
 
-  handlePutPlaylist(req, res) {
+  async handlePutPlaylist(req, res) {
     const { id } = req.params
     const body = req.body
-    const updated = this._controller.updatePlaylist(id, body)
+    const updated = await this._controller.updatePlaylist(id, body)
     if (updated) {
       this._response.success(req, res, updated, this._httpCode.OK)
     } else {

@@ -710,7 +710,7 @@ paths:
       tags:
       - Playlist
       summary: Crear una playlist
-      description: Se creará una playlist para utilizarla en la aplicación
+      description: Se creará una playlist para utilizarla en la aplicación      
       requestBody: 
         description: Propiedades para crear una playlist 
         content: 
@@ -733,6 +733,11 @@ paths:
       - Playlist
       summary: Todos los playlists
       description: Retorna todos los playlists de la plataforma      
+      parameters:
+        - in: query
+          name: idOwner          
+          schema:
+            type: string
       responses:
         200:
           description: Array de todos las playlists
@@ -846,7 +851,7 @@ paths:
           name: idSong
           required: true
           schema:
-            type: integer            
+            type: string            
           description: ID de la canción
       responses:
         201:

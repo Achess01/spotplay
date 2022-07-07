@@ -18,8 +18,8 @@ export const validateCreate = [
     .exists()
     .withMessage('Expected: idOwner')
     .bail()
-    .isInt()
-    .withMessage('idOwner should be a number'),
+    .isLength({ min: 24 })
+    .withMessage('idOwner should be at least 24 characters'),
   resultHandler
 ]
 

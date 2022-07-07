@@ -30,14 +30,14 @@ export const validateCreate = [
     .exists()
     .withMessage('Expected: idArtist')
     .bail()
-    .isInt()
-    .withMessage('idArtist should be a number'),
+    .isLength({ min: 24 })
+    .withMessage('idArtist should be at least 24 characters'),
   body('idGenre')
     .exists()
     .withMessage('Expected: idGenre')
     .bail()
-    .isInt()
-    .withMessage('idGenre should be a number'),
+    .isLength({ min: 24 })
+    .withMessage('idGenre should be at least 24 characters'),
   resultHandler
 ]
 

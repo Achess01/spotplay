@@ -7,16 +7,16 @@ class PlaylistController {
 
   async addSong(id, idSong) {
     const playlist = await this._service.getEntity('playlists', id)
-    const song = await this._service.getEntity('song', idSong)
+    const song = await this._service.getEntity('songs', idSong)
     if (!song || !playlist) return null
     const playlistSong = new this._auxiliarEntity(playlist._id, song._id)
-    return await this._service.save('playlistSong', playlistSong)
+    return await this._service.save('playlistsongs', playlistSong)
   }
 
   async getPlaylists(idOwner) {
     let playlists = await this._service.getDataFromTable('playlists')
     if (idOwner !== null) {
-      playlists = playlists.filter((p) => p._idOwner === parseInt(idOwner))
+      playlists = playlists.filter((p) => p._idOwner === idOwner)
     }
     return playlists
   }
@@ -37,12 +37,17 @@ class PlaylistController {
     if (!playlist) return null
     const playlistSongs = await this._service.getDataFromTable('playlistsongs')
     const songIds = playlistSongs
-      .filter((ps) => ps._idPlaylist === parseInt(id))
+      .filter((ps) => ps._idPlaylist === id)
       .map((ps) => ps._idSong)
     const allSongs = await this._service.getDataFromTable('songs')
-    const selectedSongs = allSongs.filter((s) => songIds.includes(s._id))
-    playlist.songs = selectedSongs
-    return playlist
+
+    const selectedSongs = allSongs.filter((s) => {
+      if (songIds.includes(s._id.toString())) return true
+      return false
+    })
+    
+
+    return { ...playlist._doc, songs: selectedSongs }
   }
 
   async updatePlaylist(id, content) {
