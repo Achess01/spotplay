@@ -8,6 +8,7 @@ import { response } from '../../response/response.js'
 import { HttpStatusCode } from '../../response/httpCode.js'
 import Role from '../../entities/Role.js'
 import { validateCreate } from './validate.js'
+import { checkToken } from '../middlewareHandler.js'
 
 export const roleModule = () => {
   // const servicesRole = new DataJson()
@@ -19,7 +20,8 @@ export const roleModule = () => {
     controller: roleCotroller,
     response,
     httpCode: HttpStatusCode,
-    checkRole: validateCreate
+    checkRole: validateCreate,
+    checkToken
   })
   return roleRouter._router
 }

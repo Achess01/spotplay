@@ -7,6 +7,7 @@ import { response } from '../../response/response.js'
 import { HttpStatusCode } from '../../response/httpCode.js'
 import Artist from '../../entities/Artist.js'
 import { validateCreate } from './validate.js'
+import { checkToken, checkEditor } from '../middlewareHandler.js'
 
 export const artistModule = () => {
   // const servicesArtist = new DataJson()
@@ -17,7 +18,9 @@ export const artistModule = () => {
     controller: artistCotroller,
     response,
     httpCode: HttpStatusCode,
-    checkArtist: validateCreate
+    checkArtist: validateCreate,
+    checkToken,
+    checkEditor
   })
   return artistRouter._router
 }

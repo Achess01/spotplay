@@ -1,19 +1,36 @@
 class RoleRouter {
-  constructor({ router, controller, response, httpCode, checkRole }) {
+  constructor({
+    router,
+    controller,
+    response,
+    httpCode,
+    checkRole,
+    checkToken
+  }) {
     this._router = router()
     this._controller = controller
     this._response = response
     this._httpCode = httpCode
     this._checkRole = checkRole
+    this._checkToken = checkToken
     this.registerRoutes()
   }
 
   registerRoutes() {
-    this._router.post('/', this._checkRole, this.handlePostRole.bind(this))
+    this._router.post(
+      '/',
+      this._checkToken,
+      this._checkRole,
+      this.handlePostRole.bind(this)
+    )
     this._router.get('/', this.handleGetRoles.bind(this))
     this._router.get('/:id', this.handleGetRole.bind(this))
-    this._router.put('/:id', this.handlePutRole.bind(this))
-    this._router.delete('/:id', this.handleDeleteRole.bind(this))
+    this._router.put('/:id', this._checkToken, this.handlePutRole.bind(this))
+    this._router.delete(
+      '/:id',
+      this._checkToken,
+      this.handleDeleteRole.bind(this)
+    )
   }
 
   async handlePostRole(req, res) {

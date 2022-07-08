@@ -1,19 +1,45 @@
 class SongRouter {
-  constructor(router, controller, response, httpCode, validateCreate) {
+  constructor(
+    router,
+    controller,
+    response,
+    httpCode,
+    validateCreate,
+    checkToken,
+    checkEditor
+  ) {
     this._router = router()
     this._controller = controller
     this._response = response
     this._httpCode = httpCode
     this._validateCreate = validateCreate
+    this._checkToken = checkToken
+    this._checkEditor = checkEditor
     this.registerRoutes()
   }
 
   registerRoutes() {
+    this._router.post(
+      '/',
+      this._checkToken,
+      this._checkEditor,
+      this._validateCreate,
+      this.handlePostSong.bind(this)
+    )
     this._router.get('/', this.handleGetSong.bind(this))
-    this._router.post('/', this._validateCreate, this.handlePostSong.bind(this))
     this._router.get('/:idSong', this.handleGetOneSong.bind(this))
-    this._router.put('/:idSong', this.handlePutOneSong.bind(this))
-    this._router.delete('/:idSong', this.handleDeleteOneSong.bind(this))
+    this._router.put(
+      '/:idSong',
+      this._checkToken,
+      this._checkEditor,
+      this.handlePutOneSong.bind(this)
+    )
+    this._router.delete(
+      '/:idSong',
+      this._checkToken,
+      this._checkEditor,
+      this.handleDeleteOneSong.bind(this)
+    )
   }
 
   async handleGetSong(req, res) {
@@ -21,7 +47,11 @@ class SongRouter {
       const artistId = req.query.artistId || null
       const genreId = req.query.genreId || null
       const title = req.query.title || null
-      const result = await this._controller.getAllSongs({ artistId, genreId, title })
+      const result = await this._controller.getAllSongs({
+        artistId,
+        genreId,
+        title
+      })
       if (!result) {
         this._response.success(
           req,
@@ -48,11 +78,11 @@ class SongRouter {
     if (result) {
       this._response.success(req, res, result, this._httpCode.CREATED)
     } else {
-      this._response.success(
+      this._response.error(
         req,
         res,
         'Error',
-        this._httpCode.this._httpCode.INTERNAL_SERVER_ERROR
+        this._httpCode.INTERNAL_SERVER_ERROR
       )
     }
   }

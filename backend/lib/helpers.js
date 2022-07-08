@@ -13,8 +13,10 @@ const helpers = {
     return bcrypt.compareSync(password, hashedPassword)
   },
 
-  generateToken: (id) => {
-    return jwt.sign({ id }, config.jwt.secret, { expiresIn: '1h' })
+  generateToken: (id, role) => {
+    return jwt.sign({ id, role }, config.jwt.secret, {
+      expiresIn: '1h'
+    })
   },
 
   verifyToken: (token) => {

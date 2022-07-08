@@ -1,19 +1,31 @@
 class UserRouter {
-  constructor({ router, controller, response, httpCode, checkUser }) {
+  constructor({
+    router,
+    controller,
+    response,
+    httpCode,
+    checkUser,
+    checkToken
+  }) {
     this._router = router()
     this._controller = controller
     this._response = response
     this._httpCode = httpCode
     this._checkUser = checkUser
+    this._checkToken = checkToken
     this.registerRoutes()
   }
 
   registerRoutes() {
     this._router.post('/signup', this._checkUser, this.handleSignUp.bind(this))
-    this._router.get('/', this.handleGetUsers.bind(this))
-    this._router.get('/:id', this.handleGetUser.bind(this))
-    this._router.delete('/:id', this.handleDeleteUser.bind(this))
-    this._router.put('/:id', this.handlePutUser.bind(this))
+    this._router.get('/', this._checkToken, this.handleGetUsers.bind(this))
+    this._router.get('/:id', this._checkToken, this.handleGetUser.bind(this))
+    this._router.delete(
+      '/:id',
+      this._checkToken,
+      this.handleDeleteUser.bind(this)
+    )
+    this._router.put('/:id', this._checkToken, this.handlePutUser.bind(this))
   }
 
   async handleSignUp(req, res) {

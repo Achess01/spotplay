@@ -15,8 +15,10 @@ export default class AuthController {
       )
       if (!founded) return this.wrongCredentials()
       const result = this._comparePassword(user.password, founded._password)
+      console.log(founded)
       if (result) {
-        const token = this._generateToken(founded._id)
+        const role = await this._services.getEntity('roles', founded._roleid)
+        const token = this._generateToken(founded._id, role)
         return this.loginSuccess(founded, token)
       }
       return this.wrongCredentials()

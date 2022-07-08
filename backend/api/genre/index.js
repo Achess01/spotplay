@@ -8,6 +8,7 @@ import { response } from '../../response/response.js'
 import { HttpStatusCode } from '../../response/httpCode.js'
 import Genre from '../../entities/Genre.js'
 import { validateCreate } from './validate.js'
+import { checkToken, checkEditor } from '../middlewareHandler.js'
 
 export const genreModule = () => {
   // const servicesGenre = new DataJson()
@@ -19,7 +20,9 @@ export const genreModule = () => {
     controller: genreCotroller,
     response,
     httpCode: HttpStatusCode,
-    checkGenre: validateCreate
+    checkGenre: validateCreate,
+    checkToken,
+    checkEditor
   })
   return genreRouter._router
 }

@@ -20,7 +20,7 @@ export const validateCreateUser = [
     .bail()
     .isLength({ min: 6 })
     .withMessage('Password should be at least 6 characters'),
-  body('roleId').optional().isInt().withMessage('roleId should be a number'),
+  body('roleId').optional().isLength({ min: 24 }).withMessage('roleId should be at least 24 characters'),
   resultHandler
 ]
 

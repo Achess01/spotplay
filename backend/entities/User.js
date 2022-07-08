@@ -4,7 +4,6 @@ class User {
     this._username = username
     this._email = email
     this._password = password
-    if (roleId !== null) roleId = parseInt(roleId)
     this._roleId = roleId
   }
 

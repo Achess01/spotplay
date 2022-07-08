@@ -1,19 +1,45 @@
 class ArtistRouter {
-  constructor({ router, controller, response, httpCode, checkArtist }) {
+  constructor({
+    router,
+    controller,
+    response,
+    httpCode,
+    checkArtist,
+    checkToken,
+    checkEditor
+  }) {
     this._router = router()
     this._controller = controller
     this._response = response
     this._httpCode = httpCode
     this._checkArtist = checkArtist
+    this._checkToken = checkToken
+    this._checkEditor = checkEditor
     this.registerRoutes()
   }
 
   registerRoutes() {
-    this._router.post('/', this._checkArtist, this.handlePostArtist.bind(this))
+    this._router.post(
+      '/',
+      this._checkToken,
+      this._checkEditor,
+      this._checkArtist,
+      this.handlePostArtist.bind(this)
+    )
     this._router.get('/', this.handleGetArtists.bind(this))
     this._router.get('/:id', this.handleGetArtist.bind(this))
-    this._router.put('/:id', this.handlePutArtist.bind(this))
-    this._router.delete('/:id', this.handleDeleteArtist.bind(this))
+    this._router.put(
+      '/:id',
+      this._checkToken,
+      this._checkEditor,
+      this.handlePutArtist.bind(this)
+    )
+    this._router.delete(
+      '/:id',
+      this._checkToken,
+      this._checkEditor,
+      this.handleDeleteArtist.bind(this)
+    )
   }
 
   async handlePostArtist(req, res) {

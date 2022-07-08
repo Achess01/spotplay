@@ -8,6 +8,7 @@ import { response } from '../../response/response.js'
 import { HttpStatusCode } from '../../response/httpCode.js'
 import Playlist, { PlaylistSong } from '../../entities/Playlist.js'
 import { validateCreate } from './validate.js'
+import { checkToken } from '../middlewareHandler.js'
 
 export const playlistModule = () => {
   // const servicesPlaylist = new DataJson()
@@ -23,7 +24,8 @@ export const playlistModule = () => {
     controller: playlistCotroller,
     response,
     httpCode: HttpStatusCode,
-    checkPlaylist: validateCreate
+    checkPlaylist: validateCreate,
+    checkToken
   })
   return playlistRouter._router
 }

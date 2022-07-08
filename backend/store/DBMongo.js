@@ -27,7 +27,8 @@ export default class DBMongo {
       const newData = model(data)
       const res = await newData.save()
       return res
-    } catch {
+    } catch (error) {
+      console.error(error)
       return null
     }
   }

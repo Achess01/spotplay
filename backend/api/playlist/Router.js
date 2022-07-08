@@ -1,10 +1,18 @@
 class PlaylistRouter {
-  constructor({ router, controller, response, httpCode, checkPlaylist }) {
+  constructor({
+    router,
+    controller,
+    response,
+    httpCode,
+    checkPlaylist,
+    checkToken
+  }) {
     this._router = router()
     this._controller = controller
     this._response = response
     this._httpCode = httpCode
     this._checkPlaylist = checkPlaylist
+    this._checkToken = checkToken
     this.registerRoutes()
   }
 
@@ -14,11 +22,23 @@ class PlaylistRouter {
       this._checkPlaylist,
       this.handlePostPlaylist.bind(this)
     )
+    this._router.post(
+      '/:id/:idSong',
+      this._checkToken,
+      this.handleAddSong.bind(this)
+    )
     this._router.get('/', this.handleGetPlaylists.bind(this))
-    this._router.post('/:id/:idSong', this.handleAddSong.bind(this))
     this._router.get('/:id', this.handleGetPlaylist.bind(this))
-    this._router.put('/:id', this.handlePutPlaylist.bind(this))
-    this._router.delete('/:id', this.handleDeletePlaylist.bind(this))
+    this._router.put(
+      '/:id',
+      this._checkToken,
+      this.handlePutPlaylist.bind(this)
+    )
+    this._router.delete(
+      '/:id',
+      this._checkToken,
+      this.handleDeletePlaylist.bind(this)
+    )
   }
 
   async handleAddSong(req, res) {

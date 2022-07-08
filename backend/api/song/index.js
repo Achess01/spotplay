@@ -8,6 +8,7 @@ import { response } from '../../response/response.js'
 import { HttpStatusCode } from '../../response/httpCode.js'
 import Song from '../../entities/Song.js'
 import { validateCreate } from './validate.js'
+import { checkToken, checkEditor } from '../middlewareHandler.js'
 
 export const songModule = () => {
   // const servicesSong = new DataJson()
@@ -19,7 +20,9 @@ export const songModule = () => {
     songCotroller,
     response,
     HttpStatusCode,
-    validateCreate
+    validateCreate,
+    checkToken,
+    checkEditor
   )
   return songRouter._router
 }

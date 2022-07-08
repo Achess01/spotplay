@@ -54,11 +54,11 @@ const models = {
         required: true
       },
       _idArtist: {
-        type: Number,
+        type: String,
         required: true
       },
       _idGenre: {
-        type: Number,
+        type: String,
         required: true
       }
     })

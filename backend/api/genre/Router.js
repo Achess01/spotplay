@@ -1,19 +1,45 @@
 class GenreRouter {
-  constructor({ router, controller, response, httpCode, checkGenre }) {
+  constructor({
+    router,
+    controller,
+    response,
+    httpCode,
+    checkGenre,
+    checkToken,
+    checkEditor
+  }) {
     this._router = router()
     this._controller = controller
     this._response = response
     this._httpCode = httpCode
     this._checkGenre = checkGenre
+    this._checkToken = checkToken
+    this._checkEditor = checkEditor
     this.registerRoutes()
   }
 
   registerRoutes() {
-    this._router.post('/', this._checkGenre, this.handlePostGenre.bind(this))
+    this._router.post(
+      '/',
+      this._checkToken,
+      this._checkEditor,
+      this._checkGenre,
+      this.handlePostGenre.bind(this)
+    )
     this._router.get('/', this.handleGetGenres.bind(this))
     this._router.get('/:id', this.handleGetGenre.bind(this))
-    this._router.put('/:id', this.handlePutGenre.bind(this))
-    this._router.delete('/:id', this.handleDeleteGenre.bind(this))
+    this._router.put(
+      '/:id',
+      this._checkToken,
+      this._checkEditor,
+      this.handlePutGenre.bind(this)
+    )
+    this._router.delete(
+      '/:id',
+      this._checkToken,
+      this._checkEditor,
+      this.handleDeleteGenre.bind(this)
+    )
   }
 
   async handlePostGenre(req, res) {
