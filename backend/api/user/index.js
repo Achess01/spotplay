@@ -9,7 +9,7 @@ import { HttpStatusCode } from '../../response/httpCode.js'
 import User from '../../entities/User.js'
 import helpers from '../../lib/helpers.js'
 import { validateCreateUser } from './validate.js'
-import { checkToken } from '../middlewareHandler.js'
+import { checkToken, checkAdmin } from '../middlewareHandler.js'
 
 export const userModule = () => {
   // const servicesUser = new DataJson()
@@ -28,7 +28,8 @@ export const userModule = () => {
     response,
     httpCode: HttpStatusCode,
     checkUser: validateCreateUser,
-    checkToken
+    checkToken,
+    checkAdmin
   })
   return userRouter._router
 }

@@ -49,6 +49,12 @@ class PlaylistController {
     return { ...playlist._doc, songs: selectedSongs }
   }
 
+  async isOwner(idPlaylist, idOwner) {
+    const playlist = await this._service.getEntity('playlists', idPlaylist)
+    if (!playlist) return false
+    return playlist._idOwner === idOwner
+  }
+
   async updatePlaylist(id, content) {
     const updated = await this._service.update('playlists', id, content)
     return updated

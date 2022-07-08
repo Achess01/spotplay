@@ -26,6 +26,7 @@ class PlaylistRouter {
     this._router.post(
       '/:id/:idSong',
       this._checkToken,
+      this.checkPlaylistOwnerMiddleware.bind(this),
       this.handleAddSong.bind(this)
     )
     this._router.get('/', this.handleGetPlaylists.bind(this))
@@ -40,6 +41,22 @@ class PlaylistRouter {
       this._checkToken,
       this.handleDeletePlaylist.bind(this)
     )
+  }
+
+  async checkPlaylistOwnerMiddleware(req, res, next) {
+    const idPlaylist = req.params.id
+    const idOwner = res.locals.user.id
+    const isOwner = await this._controller.isOwner(idPlaylist, idOwner)
+    if (isOwner) {
+      next()
+    } else {
+      this._response.error(
+        req,
+        res,
+        'This is not your playlist',
+        this._httpCode.UNAUTHORIZED
+      )
+    }
   }
 
   async handleAddSong(req, res) {

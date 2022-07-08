@@ -5,7 +5,8 @@ class UserRouter {
     response,
     httpCode,
     checkUser,
-    checkToken
+    checkToken,
+    checkAdmin
   }) {
     this._router = router()
     this._controller = controller
@@ -13,6 +14,7 @@ class UserRouter {
     this._httpCode = httpCode
     this._checkUser = checkUser
     this._checkToken = checkToken
+    this._checkAdmin = checkAdmin
     this.registerRoutes()
   }
 
@@ -23,9 +25,30 @@ class UserRouter {
     this._router.delete(
       '/:id',
       this._checkToken,
+      this._checkAdmin,
       this.handleDeleteUser.bind(this)
     )
-    this._router.put('/:id', this._checkToken, this.handlePutUser.bind(this))
+    this._router.put(
+      '/:id',
+      this._checkToken,
+      this.checkIsItselfMiddleware.bind(this),
+      this.handlePutUser.bind(this)
+    )
+  }
+
+  async checkIsItselfMiddleware(req, res, next) {
+    const idUser = res.locals.user.id
+    const { id } = req.params
+    if (idUser === id) {
+      next()
+    } else {
+      this._response.error(
+        req,
+        res,
+        'You cannot edit another user',
+        this._httpCode.UNAUTHORIZED
+      )
+    }
   }
 
   async handleSignUp(req, res) {

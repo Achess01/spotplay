@@ -5,7 +5,8 @@ class RoleRouter {
     response,
     httpCode,
     checkRole,
-    checkToken
+    checkToken,
+    checkAdmin
   }) {
     this._router = router()
     this._controller = controller
@@ -13,6 +14,7 @@ class RoleRouter {
     this._httpCode = httpCode
     this._checkRole = checkRole
     this._checkToken = checkToken
+    this._checkAdmin = checkAdmin
     this.registerRoutes()
   }
 
@@ -20,15 +22,22 @@ class RoleRouter {
     this._router.post(
       '/',
       this._checkToken,
+      this._checkAdmin,
       this._checkRole,
       this.handlePostRole.bind(this)
     )
     this._router.get('/', this.handleGetRoles.bind(this))
     this._router.get('/:id', this.handleGetRole.bind(this))
-    this._router.put('/:id', this._checkToken, this.handlePutRole.bind(this))
+    this._router.put(
+      '/:id',
+      this._checkToken,
+      this._checkAdmin,
+      this.handlePutRole.bind(this)
+    )
     this._router.delete(
       '/:id',
       this._checkToken,
+      this._checkAdmin,
       this.handleDeleteRole.bind(this)
     )
   }

@@ -45,9 +45,18 @@ export const checkToken = async (req, res, next) => {
 
 export const checkEditor = (req, res, next) => {
   const { role } = res.locals.user
-  if (role && role._name === 'Editor') {
+  if (role && (role._name === 'Editor' || role._name === 'Admin')) {
     next()
   } else {
     response.error(req, res, 'You need to be an editor')
+  }
+}
+
+export const checkAdmin = (req, res, next) => {
+  const { role } = res.locals.user
+  if (role && role._name === 'Admin') {
+    next()
+  } else {
+    response.error(req, res, 'You need to be an admin')
   }
 }
