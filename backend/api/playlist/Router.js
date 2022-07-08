@@ -34,11 +34,13 @@ class PlaylistRouter {
     this._router.put(
       '/:id',
       this._checkToken,
+      this.checkPlaylistOwnerMiddleware.bind(this),
       this.handlePutPlaylist.bind(this)
     )
     this._router.delete(
       '/:id',
       this._checkToken,
+      this.checkPlaylistOwnerMiddleware.bind(this),
       this.handleDeletePlaylist.bind(this)
     )
   }
