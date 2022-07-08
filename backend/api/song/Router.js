@@ -90,7 +90,7 @@ class SongRouter {
   async handleGetOneSong(req, res) {
     try {
       const { idSong } = req.params
-      const idNumber = parseInt(idSong)
+      const idNumber = idSong
       const song = await this._controller.getOneSong(idNumber)
       if (song) {
         this._response.success(req, res, song, this._httpCode.OK)
