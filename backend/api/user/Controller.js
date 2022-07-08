@@ -30,6 +30,12 @@ class UserController {
   }
 
   async createNewUser(user) {
+    const founded = await this._service.getEntityByAttribute(
+      'users',
+      '_username',
+      user.username
+    )
+    if (founded) return 1
     const newUser = new this._entity(user)
     newUser.encryptPassword(user.password, this._hashPassword)
     const response = await this._service.save('users', {

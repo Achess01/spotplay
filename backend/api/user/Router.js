@@ -33,7 +33,14 @@ class UserRouter {
       const user = req.body
       const to = user.email // email for sending registration message
       const result = await this._controller.createNewUser(user)
-      if (result) {
+      if (result === 1) {
+        this._response.success(
+          req,
+          res,
+          'This username is taken',
+          this._httpCode.BAD_REQUEST
+        )
+      } else if (result) {
         this._controller.sendEmail(
           to,
           'Registro Exitoso',
