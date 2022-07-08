@@ -19,6 +19,7 @@ class PlaylistRouter {
   registerRoutes() {
     this._router.post(
       '/',
+      this._checkToken,
       this._checkPlaylist,
       this.handlePostPlaylist.bind(this)
     )
